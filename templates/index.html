@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MVP Speaking App</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    button { padding: 10px 14px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .muted { color: #666; font-size: 0.9rem; }
+    textarea { width: 100%; min-height: 80px; }
+    pre { background: #fafafa; padding: 12px; border-radius: 10px; overflow: auto; }
+    .badge { display:inline-block; padding: 2px 8px; border-radius: 9999px; border:1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Speaking MVP (Azure Pronunciation Assessment)</h1>
+
+  <div class="card">
+    <h2>Course A: Phrase Practice</h2>
+    <p class="muted">Student reads the phrase. You get pronunciation, accuracy, fluency, completeness.</p>
+    <label>Target Phrase</label>
+    <textarea id="phrase">Please call me back tomorrow morning.</textarea>
+    <div class="row">
+      <label>Language:</label>
+      <select id="lang1">
+        <option value="en-US" selected>English (US)</option>
+        <option value="en-GB">English (UK)</option>
+      </select>
+      <span class="badge" id="status1">idle</span>
+    </div>
+    <div class="row">
+      <button id="rec1">● Record</button>
+      <button id="stop1" disabled>■ Stop</button>
+      <button id="send1" disabled>⇧ Upload & Score</button>
+    </div>
+    <audio id="audio1" controls></audio>
+    <h4>Result</h4>
+    <pre id="result1">—</pre>
+  </div>
+
+  <div class="card">
+    <h2>Course B: Prompt Response (30–60s)</h2>
+    <p class="muted">Student speaks freely. We transcribe first, then score using the transcript as the reference text.</p>
+    <label>Prompt (shown to student)</label>
+    <textarea id="prompt">Describe your favorite place and explain why it is meaningful to you.</textarea>
+    <div class="row">
+      <label>Language:</label>
+      <select id="lang2">
+        <option value="en-US" selected>English (US)</option>
+        <option value="en-GB">English (UK)</option>
+      </select>
+      <span class="badge" id="status2">idle</span>
+    </div>
+    <div class="row">
+      <button id="rec2">● Record</button>
+      <button id="stop2" disabled>■ Stop</button>
+      <button id="send2" disabled>⇧ Upload & Score</button>
+    </div>
+    <audio id="audio2" controls></audio>
+    <h4>Result</h4>
+    <pre id="result2">—</pre>
+  </div>
+
+  <p class="muted">Tip: Embed this page inside a TutorLMS lesson using an iframe.</p>
+
+  <script src="/static/recorder.js"></script>
+</body>
+</html>
