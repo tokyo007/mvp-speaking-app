@@ -1,87 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>MVP Speaking App</title>
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-    button { padding: 10px 14px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; }
-    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .muted { color: #666; font-size: 0.9rem; }
-    textarea { width: 100%; min-height: 80px; }
-    pre { background: #fafafa; padding: 12px; border-radius: 10px; overflow: auto; }
-    .badge { display:inline-block; padding: 4px 10px; border-radius: 9999px; border:1px solid #ccc; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 30px; }
+    button { margin: 4px; }
+    audio { display: block; margin-top: 8px; }
+    .muted { color: #666; font-size: 0.9em; }
+    .row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; border:1px solid #ccc; font-size: 0.9em; }
     .badge.good { border-color:#2e7d32; }
     .badge.warn { border-color:#f9a825; }
     .badge.bad  { border-color:#c62828; }
-    .table { border-collapse: collapse; width: 100%; }
-    .table th, .table td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
+    .table { border-collapse: collapse; width: 100%; margin-top: 8px; }
+    .table th, .table td { border: 1px solid #e5e7eb; padding: 6px; text-align: left; }
     .word-bad { background: #fff3f3; }
-
   </style>
 </head>
 <body>
-  <h1>Speaking MVP (Azure Pronunciation Assessment)</h1>
 
-  <div class="card">
-    <h2>Course A: Phrase Practice</h2>
-    <p class="muted">Student reads the phrase. You get pronunciation, accuracy, fluency, completeness.</p>
-    <label>Target Phrase</label>
-    <textarea id="phrase">Please call me back tomorrow morning.</textarea>
-    <div class="row">
-      <label>Language:</label>
-      <select id="lang1">
-        <option value="en-US" selected>English (US)</option>
-        <option value="en-GB">English (UK)</option>
-      </select>
-      <span class="badge" id="status1">idle</span>
-    </div>
-    <div class="row">
-      <button id="rec1">● Record</button>
-      <button id="stop1" disabled>■ Stop</button>
-      <button id="send1" disabled>⇧ Upload & Score</button>
-    </div>
-    <audio id="audio1" controls></audio>
-    <h4>Result</h4>
-    <div class="row" id="scores1" style="gap:8px; flex-wrap:wrap;"></div>
-    <div id="recognized1" class="muted" style="margin-top:8px;"></div>
-    <div id="words1" style="margin-top:12px;"></div>
+  <h1>MVP Speaking App</h1>
 
-    <pre id="result1">—</pre>
-  </div>
+  <!-- ====== Course A: Phrase Practice ====== -->
+  <h2>Course A: Phrase Practice</h2>
+  <label for="phrase">Reference phrase:</label>
+  <input type="text" id="phrase" value="This is a sample phrase.">
+  <br>
+  <label for="lang1">Language:</label>
+  <select id="lang1">
+    <option value="en-US">English (US)</option>
+    <option value="en-GB">English (UK)</option>
+  </select>
+  <br><br>
 
-  <div class="card">
-    <h2>Course B: Prompt Response (30–60s)</h2>
-    <p class="muted">Student speaks freely. We transcribe first, then score using the transcript as the reference text.</p>
-    <label>Prompt (shown to student)</label>
-    <textarea id="prompt">Describe your favorite place and explain why it is meaningful to you.</textarea>
-    <div class="row">
-      <label>Language:</label>
-      <select id="lang2">
-        <option value="en-US" selected>English (US)</option>
-        <option value="en-GB">English (UK)</option>
-      </select>
-      <span class="badge" id="status2">idle</span>
-    </div>
-    <div class="row">
-      <button id="rec2">● Record</button>
-      <button id="stop2" disabled>■ Stop</button>
-      <button id="send2" disabled>⇧ Upload & Score</button>
-    </div>
-    <audio id="audio2" controls></audio>
-    <h4>Result</h4>
-    <div class="row" id="scores2" style="gap:8px; flex-wrap:wrap;"></div>
-    <div id="recognized2" class="muted" style="margin-top:8px;"></div>
-    <div id="transcript2" class="muted" style="margin-top:8px;"></div>
-    <div id="words2" style="margin-top:12px;"></div>
+  <button id="rec1">Record</button>
+  <button id="stop1" disabled>Stop</button>
+  <button id="send1" disabled>Send</button>
+  <span id="status1" class="muted"></span>
+  <audio id="audio1" controls></audio>
 
-    <pre id="result2">—</pre>
-  </div>
+  <h4>Result</h4>
+  <div id="scores1" class="row"></div>
+  <div id="recognized1" class="muted"></div>
+  <div id="words1"></div>
 
-  <p class="muted">Tip: Embed this page inside a TutorLMS lesson using an iframe.</p>
+  <hr>
 
-  <script src="/static/recorder.js"></script>
+  <!-- ====== Course B: Prompt Response ====== -->
+  <h2>Course B: Prompt Response</h2>
+  <p class="muted">Read the prompt below, then record your spoken answer (30–60 seconds).</p>
+  <p><em>Prompt:</em> Describe your favorite holiday and explain why you enjoy it.</p>
+  <label for="lang2">Language:</label>
+  <select id="lang2">
+    <option value="en-US">English (US)</option>
+    <option value="en-GB">English (UK)</option>
+  </select>
+  <br><br>
+
+  <button id="rec2">Record</button>
+  <button id="stop2" disabled>Stop</button>
+  <button id="send2" disabled>Send</button>
+  <span id="status2" class="muted"></span>
+  <audio id="audio2" controls></audio>
+
+  <h4>Result</h4>
+  <div id="scores2" class="row"></div>
+  <div id="recognized2" class="muted"></div>
+  <div id="transcript2" class="muted"></div>
+  <div id="words2"></div>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='recorder.js') }}"></script>
+
 </body>
 </html>
