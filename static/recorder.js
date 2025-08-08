@@ -1,4 +1,3 @@
-\
 let chunks1 = [];
 let chunks2 = [];
 let mediaRecorder1 = null;
