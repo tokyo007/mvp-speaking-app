@@ -14,8 +14,6 @@
     .badge.good { border-color:#2e7d32; }
     .badge.warn { border-color:#f9a825; }
     .badge.bad  { border-color:#c62828; }
-    .table { border-collapse: collapse; width: 100%; margin-top: 8px; }
-    .table th, .table td { border: 1px solid #e5e7eb; padding: 6px; text-align: left; }
     .word-bad { background: #fff3f3; }
   </style>
 </head>
@@ -23,56 +21,42 @@
 
   <h1>MVP Speaking App</h1>
 
-  <!-- ====== Course A: Phrase Practice ====== -->
   <h2>Course A: Phrase Practice</h2>
-  <label for="phrase">Reference phrase:</label>
   <input type="text" id="phrase" value="This is a sample phrase.">
-  <br>
-  <label for="lang1">Language:</label>
   <select id="lang1">
     <option value="en-US">English (US)</option>
     <option value="en-GB">English (UK)</option>
   </select>
   <br><br>
-
   <button id="rec1">Record</button>
   <button id="stop1" disabled>Stop</button>
   <button id="send1" disabled>Send</button>
   <span id="status1" class="muted"></span>
   <audio id="audio1" controls></audio>
-
-  <h4>Result</h4>
   <div id="scores1" class="row"></div>
+  <div id="scores1_note" class="muted"></div>
   <div id="recognized1" class="muted"></div>
   <div id="words1"></div>
 
   <hr>
 
-  <!-- ====== Course B: Prompt Response ====== -->
   <h2>Course B: Prompt Response</h2>
-  <p class="muted">Read the prompt below, then record your spoken answer (30–60 seconds).</p>
-  <p><em>Prompt:</em> Describe your favorite holiday and explain why you enjoy it.</p>
-  <label for="lang2">Language:</label>
+  <p class="muted">Describe your favorite holiday and explain why you enjoy it.</p>
   <select id="lang2">
     <option value="en-US">English (US)</option>
     <option value="en-GB">English (UK)</option>
   </select>
   <br><br>
-
   <button id="rec2">Record</button>
   <button id="stop2" disabled>Stop</button>
   <button id="send2" disabled>Send</button>
   <span id="status2" class="muted"></span>
   <audio id="audio2" controls></audio>
-
-  <h4>Result</h4>
   <div id="scores2" class="row"></div>
+  <div id="scores2_note" class="muted"></div>
   <div id="recognized2" class="muted"></div>
-  <div id="transcript2" class="muted"></div>
   <div id="words2"></div>
 
-  <!-- JS -->
   <script src="{{ url_for('static', filename='recorder.js') }}"></script>
-
 </body>
 </html>
